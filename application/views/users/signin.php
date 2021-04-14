@@ -7,7 +7,7 @@
 
 <?php $this->load->view("/users/includes/styles")?>
 
-    <title>Admin Dashboard</title>
+    <title>Signin Page</title>
 </head>
 <body>
 
@@ -15,18 +15,22 @@
 
 
     <div class="container mt-5">
+
+<?php $this->load->view("/users/includes/errors")?>
+
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <h2>Signin</h2>
-                <form>
+                
+                <form action="users/signin_process" method="POST">
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email"  placeholder="Enter email">
+                        <input type="text" class="form-control" id="email" name="email"  placeholder="Enter email">
                         
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>

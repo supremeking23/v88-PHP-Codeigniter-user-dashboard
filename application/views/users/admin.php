@@ -35,26 +35,31 @@
                         </tr>
                     </thead>
                     <tbody>
+<?php foreach($users as $user):?>
                         <tr>
-                            <td>1</td>
-                            <td><a href="/show/1">Ivan Christian Jay Funcion</a></td>
-                            <td>icjfuncion@gmail.com</td>
-                            <td>Dec. 24th 2012</td>
-                            <td>admin</td>
+                            <td><?= $user['id'] ?></td>
+                            <td><a href="/show/1"><?= $user['first_name'] .' '. $user['last_name']?></a></td>
+                            <td><?= $user['email'] ?></td>
+                            <td><?= date_format(date_create($user['created_at']), "M. jS Y")?></td>
+                            <td><?= ($user['user_level'] == 9) ? "Admin" :""?><?= ($user['user_level'] == 1) ? "Normal" :""?></td>
                             <td>
-                                <a href="/edit/1">Edit</a> | <a href="/remove/1" role="button"  data-toggle="modal" data-target="#exampleModal">remove</a>
+<?php if($this->session->userdata("user_id") != $user['id']):?>
+                                <a href="edit/<?= $user['id'] ?>">Edit</a> | <a role="button" href=""
+                                 data-toggle="modal" data-target="#delete<?= $user['id'] ?>">remove</a>
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="delete<?= $user['id'] ?>" tabindex="-1" role="dialog"  aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                        <div class="modal-content text-white bg-danger">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete user: </h5>
+                                        <div class="modal-content ">
+                                            <div class="modal-header text-white bg-danger">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete user: #<?= $user['id'] ?> </h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                               Are you sure ? 
+                                            <div class="modal-body text-danger">
+                                               <p>Are you sure ?</p>
+                                               <p>This action is irreversible, Are you sure you want to remove user:  <?= $user['email']?></p> 
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -63,8 +68,10 @@
                                         </div>
                                     </div>
                                 </div>
+<?php endif;?>
                             </td>
                         </tr>
+<?php endforeach; ?>
                     </tbody>
                 </table>
             
