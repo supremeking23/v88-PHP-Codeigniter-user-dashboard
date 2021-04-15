@@ -30,9 +30,9 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
     <?php if($this->session->userdata("is_logged_in") === TRUE){?>
-                        <a class="nav-link" href="logoff">Log Off</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>logoff">Log Off</a>
     <?php }else{ ?>
-                        <a class="nav-link" href="signin">Sign In</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>signin">Sign In</a>
     <?php } ?>
                     </li>
                 </ul>

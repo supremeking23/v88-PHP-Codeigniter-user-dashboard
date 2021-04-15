@@ -77,6 +77,7 @@
                             <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name of the user" value="<?=$user_info["last_name"]?>">
                         </div>
                         <input type="hidden" name="process-type" value="edit-info">
+                        <input type="hidden" name="user-id" value="<?=$user_info["id"];?>">
                         <button type="submit" class="btn btn-success float-right">Save</button>
                         <div class="clearfix"></div>
                     </fieldset>
@@ -100,6 +101,7 @@
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Password">
                         </div>
                         <input type="hidden" name="process-type" value="edit-password">
+                        <input type="hidden" name="user-id" value="<?=$user_info["id"];?>">
                         <button type="submit" class="btn btn-success float-right">Update Password</button>
                         <div class="clearfix"></div>
                     </fieldset>
@@ -117,6 +119,7 @@
                             <textarea class="form-control" id="description" name="description" rows="3"><?=$user_info["description"];?></textarea>
                         </div>
                         <input type="hidden" name="process-type" value="edit-description">
+                        <input type="hidden" name="user-id" value="<?=$user_info["id"];?>">
                         <button type="submit" class="btn btn-success float-right">Save</button>
                         <div class="clearfix"></div>
                     </fieldset>

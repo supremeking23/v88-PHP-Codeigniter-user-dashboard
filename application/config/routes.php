@@ -58,5 +58,6 @@ $route['show/(:any)'] = 'users/show/$1';
 $route['new'] = 'users/new';
 $route['dashboard'] = 'users/dashboard';
 $route['edit'] = 'users/edit';
+$route['edit/(:any)'] = 'users/edit/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

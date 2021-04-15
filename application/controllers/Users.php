@@ -276,14 +276,18 @@ class Users extends CI_Controller {
 					"email" => $this->input->post("email",TRUE),
 					"first_name" => $this->input->post("first_name",TRUE),
 					"last_name" => $this->input->post("last_name",TRUE),
-					"id" => $this->session->userdata("user_id"),
+					"id" =>  $this->input->post("user-id",TRUE),
 				);
 				var_dump($user_details);
 				$edit_user = $this->user->edit_user_info($user_details);
 				if($edit_user === TRUE) {
 				
 					$this->session->set_flashdata('edit-user-info-success', '<div class="alert alert-success">User information has been updated successfully</div>');
-					redirect(base_url()."edit");
+					if($this->session->userdata("user_id") == $this->input->post("user-id",TRUE)){
+						redirect(base_url()."edit");
+					}else{
+						redirect(base_url()."edit/".$this->input->post("user-id",TRUE));
+					}
 					
 				}
 				// var_dump($this->input->post());
@@ -321,28 +325,37 @@ class Users extends CI_Controller {
 				$user_details = array(
 					"password" => $encrypted_password,
 					"salt" => $salt,
-					"id" => $this->session->userdata("user_id"),
+					"id" => $this->input->post("user-id",TRUE),
 				);
 				var_dump($user_details);
 				$edit_user = $this->user->edit_user_password($user_details);
 				if($edit_user === TRUE) {
 				
 					$this->session->set_flashdata('edit-user-password-success', '<div class="alert alert-success">User password has been updated successfully</div>');
-					redirect(base_url()."edit");
+					if($this->session->userdata("user_id") == $this->input->post("user-id",TRUE)){
+						redirect(base_url()."edit");
+					}else{
+						redirect(base_url()."edit/".$this->input->post("user-id",TRUE));
+					}
 				}
 			}
 		}else if($this->input->post("process-type",TRUE) =="edit-description"){
 			var_dump($this->input->post());
 			$user_details = array(
 				"description" => $this->input->post("description",TRUE) ,
-				"id" => $this->session->userdata("user_id"),
+				"id" => $this->input->post("user-id",TRUE),
 			);
 			$edit_user = $this->user->edit_user_description($user_details);
-			// var_dump($this->input->post())
+			var_dump($this->input->post());
 			if($edit_user === TRUE) {
 				
 				$this->session->set_flashdata('edit-user-description-success', '<div class="alert alert-success">User description has been updated successfully</div>');
-				redirect(base_url()."edit");
+				
+				if($this->session->userdata("user_id") == $this->input->post("user-id",TRUE)){
+					redirect(base_url()."edit");
+				}else{
+					redirect(base_url()."edit/".$this->input->post("user-id",TRUE));
+				}
 			}
 
 		}
@@ -375,8 +388,13 @@ class Users extends CI_Controller {
 
 	}
 
-    public function edit(){
-		$data['user_info'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
+    public function edit($id = NULL){
+		if(!(is_null($id))){
+			$data['user_info'] = $this->user->get_user_by_id($id);
+		}else{
+			$data['user_info'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
+		}
+		
 		$this->load->view('users/edit',$data);
 	}
 }
