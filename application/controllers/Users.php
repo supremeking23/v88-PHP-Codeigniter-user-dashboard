@@ -366,6 +366,15 @@ class Users extends CI_Controller {
 		$this->load->view('users/show',$data);
 	}
 
+	public function delete_user(){
+		$delete_user = $this->user->delete_user_by_id($this->input->post("user-id"),TRUE);
+		if($delete_user === TRUE){
+			$this->session->set_flashdata('delete-user-success', '<div class="alert alert-success">User has been deleted successfully</div>');
+					redirect(base_url()."admin");
+		}
+
+	}
+
     public function edit(){
 		$data['user_info'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
 		$this->load->view('users/edit',$data);

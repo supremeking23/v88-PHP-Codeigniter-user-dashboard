@@ -15,6 +15,15 @@
 
 
     <div class="container mt-5">
+
+<?php if($this->session->flashdata("delete-user-success")):?>
+    <div class="row">
+        <div class="col md-12">
+<?= $this->session->flashdata("delete-user-success");?>
+        </div>
+    </div>
+<?php endif; ?>
+
         <div class="row">
             <div class="col-md-12 d-flex align-items-center  justify-content-between">
                 <h2>Manage Users</h2>
@@ -62,8 +71,12 @@
 
                                             </div>
                                             <div class="modal-footer">
+
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Yes</button>
+                                                <?= form_open("users/delete_user");?>
+                                                    <input type="hidden" name="user-id" value="<?= $user['id'] ?>">
+                                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

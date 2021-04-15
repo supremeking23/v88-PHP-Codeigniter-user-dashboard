@@ -44,6 +44,10 @@ class User extends CI_Model {
         return $this->db->query($query,$values);
     }
 
+    function delete_user_by_id($id){
+        return $this->db->query("DELETE FROM users where id = ?", array($id));
+    }
+
     // function get_all_students(){
     //     return $this->db->query("SELECT * FROM students")->result_array();
     // }
