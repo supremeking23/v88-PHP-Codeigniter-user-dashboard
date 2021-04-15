@@ -21,8 +21,8 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <h2>Signin</h2>
-                
-                <form action="users/signin_process" method="POST">
+                <?= form_open("users/signin_process");?>
+                <!-- <form action="users/signin_process" method="POST"> -->
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="text" class="form-control" id="email" name="email"  placeholder="Enter email">

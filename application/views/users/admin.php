@@ -38,7 +38,7 @@
 <?php foreach($users as $user):?>
                         <tr>
                             <td><?= $user['id'] ?></td>
-                            <td><a href="/show/1"><?= $user['first_name'] .' '. $user['last_name']?></a></td>
+                            <td><a href="show/<?=$user["id"]?>"><?= $user['first_name'] .' '. $user['last_name']?></a></td>
                             <td><?= $user['email'] ?></td>
                             <td><?= date_format(date_create($user['created_at']), "M. jS Y")?></td>
                             <td><?= ($user['user_level'] == 9) ? "Admin" :""?><?= ($user['user_level'] == 1) ? "Normal" :""?></td>

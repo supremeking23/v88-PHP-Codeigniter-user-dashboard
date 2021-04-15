@@ -63,14 +63,14 @@ class Users extends CI_Controller {
 
         }
 
-		$user = $this->user->get_user_by_email($this->input->post("email"));
+		$user = $this->user->get_user_by_email($this->input->post("email",TRUE)); //XSS clean
 		if(!$user){
             $this->session->set_flashdata('errors', '<li>Incorrect Email</li>');
 			$this->session->set_flashdata('error-type', 'Incorrect Credential');
 			redirect(base_url()."signin");
             die();
 		}else{
-			$encrypted_password = md5($this->input->post("password"). '' . $user["salt"]);
+			$encrypted_password = md5($this->input->post("password",TRUE). '' . $user["salt"]);
 			if($user["password"] == $encrypted_password){
 				$user = array(
 					'user_id' => $user['id'],
@@ -145,12 +145,12 @@ class Users extends CI_Controller {
 			die();
 		}else{
 			$salt = bin2hex(openssl_random_pseudo_bytes(22));
-			$encrypted_password = md5($this->input->post("password") . '' . $salt);
+			$encrypted_password = md5($this->input->post("password",TRUE) . '' . $salt);
 
 			$user_details = array(
-				"email" => $this->input->post("email"),
-				"first_name" => $this->input->post("first_name"),
-				"last_name" => $this->input->post("last_name"),
+				"email" => $this->input->post("email",TRUE),
+				"first_name" => $this->input->post("first_name",TRUE),
+				"last_name" => $this->input->post("last_name",TRUE),
 				"password" => $encrypted_password,
 				"salt" => $salt
 			);
@@ -220,12 +220,12 @@ class Users extends CI_Controller {
 			die();
 		}else{
 			$salt = bin2hex(openssl_random_pseudo_bytes(22));
-			$encrypted_password = md5($this->input->post("password") . '' . $salt);
+			$encrypted_password = md5($this->input->post("password",TRUE) . '' . $salt);
 
 			$user_details = array(
-				"email" => $this->input->post("email"),
-				"first_name" => $this->input->post("first_name"),
-				"last_name" => $this->input->post("last_name"),
+				"email" => $this->input->post("email",TRUE),
+				"first_name" => $this->input->post("first_name",TRUE),
+				"last_name" => $this->input->post("last_name",TRUE),
 				"password" => $encrypted_password,
 				"salt" => $salt
 			);
@@ -240,6 +240,115 @@ class Users extends CI_Controller {
 		
 	}
 
+	public function edit_profile_process(){
+		if($this->input->post("process-type",TRUE) == "edit-info"){
+
+			$config = array(
+				array(
+					'field' => 'email',
+					'label' => 'email',
+					'rules' => 'trim|required|valid_email'
+				),
+				array(
+					'field' => 'first_name',
+					'label' => 'First Name',
+					'rules' => 'trim|required'
+				),
+				array(
+					'field' => 'last_name',
+					'label' => 'Last Name',
+					'rules' => 'trim|required'
+				),
+				
+			);
+	
+			$this->form_validation->set_rules($config);
+	
+			
+			if($this->form_validation->run() === FALSE){
+				$errors = validation_errors('<li>', '</li>');
+				$this->session->set_flashdata('errors', $errors);
+				$this->session->set_flashdata('error-type', 'Edit information error');
+				redirect(base_url()."edit");
+				die();
+			}else{
+				$user_details = array(
+					"email" => $this->input->post("email",TRUE),
+					"first_name" => $this->input->post("first_name",TRUE),
+					"last_name" => $this->input->post("last_name",TRUE),
+					"id" => $this->session->userdata("user_id"),
+				);
+				var_dump($user_details);
+				$edit_user = $this->user->edit_user_info($user_details);
+				if($edit_user === TRUE) {
+				
+					$this->session->set_flashdata('edit-user-info-success', '<div class="alert alert-success">User information has been updated successfully</div>');
+					redirect(base_url()."edit");
+					
+				}
+				// var_dump($this->input->post());
+			}
+
+
+		}else if($this->input->post("process-type",TRUE) =="edit-password"){
+			$config = array(
+				array(
+					'field' => 'password',
+					'label' => 'Password',
+					'rules' => 'trim|required|min_length[8]'
+				),
+				array(
+					'field' => 'confirm_password',
+					'label' => 'Password Confirm',
+					'rules' => 'trim|required|matches[password]|min_length[8]'
+				),
+				
+			);
+	
+			$this->form_validation->set_rules($config);
+
+			$salt = bin2hex(openssl_random_pseudo_bytes(22));
+			$encrypted_password = md5($this->input->post("password",TRUE) . '' . $salt);
+	
+			
+			if($this->form_validation->run() === FALSE){
+				$errors = validation_errors('<li>', '</li>');
+				$this->session->set_flashdata('errors', $errors);
+				$this->session->set_flashdata('error-type', 'Edit password error');
+				redirect(base_url()."edit");
+				die();
+			}else{
+				$user_details = array(
+					"password" => $encrypted_password,
+					"salt" => $salt,
+					"id" => $this->session->userdata("user_id"),
+				);
+				var_dump($user_details);
+				$edit_user = $this->user->edit_user_password($user_details);
+				if($edit_user === TRUE) {
+				
+					$this->session->set_flashdata('edit-user-password-success', '<div class="alert alert-success">User password has been updated successfully</div>');
+					redirect(base_url()."edit");
+				}
+			}
+		}else if($this->input->post("process-type",TRUE) =="edit-description"){
+			var_dump($this->input->post());
+			$user_details = array(
+				"description" => $this->input->post("description",TRUE) ,
+				"id" => $this->session->userdata("user_id"),
+			);
+			$edit_user = $this->user->edit_user_description($user_details);
+			// var_dump($this->input->post())
+			if($edit_user === TRUE) {
+				
+				$this->session->set_flashdata('edit-user-description-success', '<div class="alert alert-success">User description has been updated successfully</div>');
+				redirect(base_url()."edit");
+			}
+
+		}
+
+
+	}
 
 
     public function dashboard(){
@@ -252,11 +361,13 @@ class Users extends CI_Controller {
 		
 	}
 
-    public function show(){
-		$this->load->view('users/dashboard');
+    public function show($id){
+		$data['user'] = $this->user->get_user_by_id($id);
+		$this->load->view('users/show',$data);
 	}
 
     public function edit(){
-		$this->load->view('users/edit');
+		$data['user_info'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
+		$this->load->view('users/edit',$data);
 	}
 }

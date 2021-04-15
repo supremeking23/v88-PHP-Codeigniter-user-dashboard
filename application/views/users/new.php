@@ -33,8 +33,8 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-6 col-sm-12">
-                
-                <form action="users/add_new_process" method="POST">
+                <?= form_open("users/add_new_process");?>
+                <!-- <form action="users/add_new_process" method="POST"> -->
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="text" class="form-control" id="email" name="email"  placeholder="Enter email">

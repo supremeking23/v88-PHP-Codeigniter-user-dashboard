@@ -54,6 +54,7 @@ $route['signin'] = 'users/signin';
 $route['logoff'] = 'users/logoff';
 $route['register'] = 'users/register';
 $route['admin'] = 'users/admin';
+$route['show/(:any)'] = 'users/show/$1';
 $route['new'] = 'users/new';
 $route['dashboard'] = 'users/dashboard';
 $route['edit'] = 'users/edit';

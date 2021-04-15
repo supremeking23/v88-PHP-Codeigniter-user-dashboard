@@ -26,6 +26,24 @@ class User extends CI_Model {
         return $this->db->query($query, $values);
     }
 
+    function edit_user_info($user){
+        $query = "UPDATE users SET email = ? , first_name = ? , last_name = ? , updated_at = ? WHERE id = ?";
+        $values = array($this->mysqli_real_escape_string($user['email']),$this->mysqli_real_escape_string($user['first_name']),$this->mysqli_real_escape_string($user['last_name']),date("Y-m-d, H:i:s"),$this->mysqli_real_escape_string($user['id']));
+        return $this->db->query($query,$values);
+    }
+
+    function edit_user_password($user){
+        $query = "UPDATE users SET password = ?, salt = ?, updated_at = ? WHERE id = ?";
+        $values = array($this->mysqli_real_escape_string($user['password']),$this->mysqli_real_escape_string($user['salt']),date("Y-m-d, H:i:s"),$this->mysqli_real_escape_string($user['id']));
+        return $this->db->query($query,$values);
+    }
+
+    function edit_user_description($user){
+        $query = "UPDATE users SET description = ?, updated_at = ? WHERE id = ?";
+        $values = array($this->mysqli_real_escape_string($user['description']),date("Y-m-d, H:i:s"),$this->mysqli_real_escape_string($user['id']));
+        return $this->db->query($query,$values);
+    }
+
     // function get_all_students(){
     //     return $this->db->query("SELECT * FROM students")->result_array();
     // }

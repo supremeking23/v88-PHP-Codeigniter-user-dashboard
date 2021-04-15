@@ -26,6 +26,31 @@
 
 
     <div class="container mt-5">
+<?php $this->load->view("/users/includes/errors")?>
+<?php if($this->session->flashdata("edit-user-info-success")):?>
+        <div class="row">
+            <div class="col md-12">
+<?= $this->session->flashdata("edit-user-info-success");?>
+            </div>
+        </div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata("edit-user-password-success")):?>
+        <div class="row">
+            <div class="col md-12">
+<?= $this->session->flashdata("edit-user-password-success");?>
+            </div>
+        </div>
+<?php endif; ?>
+
+<?php if($this->session->flashdata("edit-user-description-success")):?>
+        <div class="row">
+            <div class="col md-12">
+<?= $this->session->flashdata("edit-user-description-success");?>
+            </div>
+        </div>
+<?php endif; ?>
+
         <div class="row mb-5">
             <div class="col-md-6 col-sm-12">
                 <h2 class="">Edit Profile</h2>
@@ -34,24 +59,24 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
               
-                <form >
+            <?= form_open("users/edit_profile_process");?>
                     <fieldset>
                         <legend>Edit Information:</legend>
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email"  placeholder="Enter email">
+                            <input type="email" class="form-control" id="email" name="email"  placeholder="Enter email" value="<?=$user_info["email"]?>">
                             
                         </div>
                         <div class="form-group">
                             <label for="first_name">First Name</label>
-                            <input type="text" class="form-control" id="first_name" placeholder="First Name of the user">
+                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name of the user" value="<?=$user_info["first_name"]?>">
                         </div>
 
                         <div class="form-group">
                             <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" placeholder="Last Name of the user">
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name of the user" value="<?=$user_info["last_name"]?>">
                         </div>
-
+                        <input type="hidden" name="process-type" value="edit-info">
                         <button type="submit" class="btn btn-success float-right">Save</button>
                         <div class="clearfix"></div>
                     </fieldset>
@@ -60,20 +85,21 @@
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <form>
+
+            <?= form_open("users/edit_profile_process");?>
                     <fieldset>
                         <legend>Change Password:</legend>
                       
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password Confirmation</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <label for="confirm_password">Password Confirmation</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Password">
                         </div>
-
+                        <input type="hidden" name="process-type" value="edit-password">
                         <button type="submit" class="btn btn-success float-right">Update Password</button>
                         <div class="clearfix"></div>
                     </fieldset>
@@ -83,14 +109,14 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-12">
-               <form>
+            <?= form_open("users/edit_profile_process");?>
                     <fieldset>
                         <legend>Edit Description:</legend>
                       
                         <div class="form-group">
-                            <textarea class="form-control" id="description" rows="3"></textarea>
+                            <textarea class="form-control" id="description" name="description" rows="3"><?=$user_info["description"];?></textarea>
                         </div>
-
+                        <input type="hidden" name="process-type" value="edit-description">
                         <button type="submit" class="btn btn-success float-right">Save</button>
                         <div class="clearfix"></div>
                     </fieldset>
