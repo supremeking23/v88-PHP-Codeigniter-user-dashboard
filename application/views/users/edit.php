@@ -78,7 +78,7 @@
                         </div>
                         <input type="hidden" name="process-type" value="edit-info">
                         <input type="hidden" name="user-id" value="<?=$user_info["id"];?>">
-                        <button type="submit" class="btn btn-success float-right">Save</button>
+                        <button type="submit" class="btn btn-primary float-right">Save</button>
                         <div class="clearfix"></div>
                     </fieldset>
                 </form>
@@ -102,7 +102,7 @@
                         </div>
                         <input type="hidden" name="process-type" value="edit-password">
                         <input type="hidden" name="user-id" value="<?=$user_info["id"];?>">
-                        <button type="submit" class="btn btn-success float-right">Update Password</button>
+                        <button type="submit" class="btn btn-primary float-right">Update Password</button>
                         <div class="clearfix"></div>
                     </fieldset>
                 </form>
@@ -120,7 +120,7 @@
                         </div>
                         <input type="hidden" name="process-type" value="edit-description">
                         <input type="hidden" name="user-id" value="<?=$user_info["id"];?>">
-                        <button type="submit" class="btn btn-success float-right">Save</button>
+                        <button type="submit" class="btn btn-primary float-right">Save</button>
                         <div class="clearfix"></div>
                     </fieldset>
                 </form>

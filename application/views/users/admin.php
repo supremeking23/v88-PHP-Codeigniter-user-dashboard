@@ -32,7 +32,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-12 col-sm-12">
-                <table class="table">
+                <table class="table content-background">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">ID</th>

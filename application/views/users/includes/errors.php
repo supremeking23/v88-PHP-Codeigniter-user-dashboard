@@ -1,14 +1,14 @@
 <?php if($this->session->flashdata("errors")):?>
         <div class="modal error-modal"  tabindex="-1">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content content-background">
                 <div class="modal-header  bg-danger text-white">
                     <h5 class="modal-title"><?= $this->session->flashdata("error-type");?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-danger">
+                <div class="modal-body text-white">
                     <p>Please fix the following errors:</p>
                     <ul>
 <?= $this->session->flashdata("errors");?>

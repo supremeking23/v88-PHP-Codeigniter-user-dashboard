@@ -23,20 +23,6 @@ function dateDifference($date_1  , $differenceFormat = '%y %m %d %h %i %s')
 <?php $this->load->view("/users/includes/styles")?>
 
     <style>
-        .reply h2, .message span{
-            display:inline-block;
-            vertical-align:middle;
-        }
-
-        .reply h2 {
-            padding-bottom:1rem;
-        }
-        .reply p {
-            border-top:1px solid #000;
-            padding-top:1rem;
-        }
-
-
     </style>
 
     <title>Admin Information</title>
@@ -57,13 +43,13 @@ function dateDifference($date_1  , $differenceFormat = '%y %m %d %h %i %s')
         </div>
 <?php endif; ?>
 
-        <div class="row">
+        <div class="row ">
             <div class="col-md-12">
                 <!-- <h1><?= $user['first_name']?> <?= $user['last_name']?></h1> -->
                 <!-- <a href="<?php echo base_url(); ?>admin">link</a> -->
             </div>
         </div>
-        <dl class="row mt-3">
+        <dl class="row mt-3  content-background p-4">
             <dt class="col-sm-3">Message to: </dt>
             <dd class="col-sm-9"><?= $user["first_name"]?> <?= $user["last_name"]?> </dd>
             <dt class="col-sm-3">Message from: </dt>
@@ -83,7 +69,7 @@ function dateDifference($date_1  , $differenceFormat = '%y %m %d %h %i %s')
                 <!-- Modal -->
                 <div class="modal fade post-message-reply" id="post-reply" tabindex="-1" aria-labelledby="post-message" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+                        <div class="modal-content content-background">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Reply to  <?= $message['first_name']?> <?= $message["last_name"]?> message</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -142,7 +128,7 @@ if((int) $scatter_date_info[0] >= 1){
 }
 
 ?>
-            <div class="col-md-12 reply mb-5" style="border:1px solid #000;padding:1rem;border-radius:1.5rem">
+            <div class="col-md-12 reply content-background p-4 mb-5" style="">
                 <h2><?=$reply["first_name"]?> <?=$reply["last_name"]?> <small class="text-muted">wrote</small></h2>
                 <span class="float-right"><?= $time?></span>
                 <p><?=$reply["reply"]?></p>

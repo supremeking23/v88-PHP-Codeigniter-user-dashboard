@@ -26,13 +26,13 @@
 <?php endif; ?>
 
         <div class="row">
-            <div class="col-md-12 d-flex align-items-center  justify-content-between">
+            <div class="col-md-12 d-flex align-items-center  justify-content-between ">
                 <h2>Add a new user</h2>
                 <a href="<?= base_url();?>admin" class="btn btn-primary btn-sm">Return to Dashboard</a>
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 content-background p-4">
                 <?= form_open("users/add_new_process");?>
                 <!-- <form action="users/add_new_process" method="POST"> -->
                     <div class="form-group">
@@ -59,7 +59,7 @@
                         <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
                     </div>
 
-                    <button type="submit" class="btn btn-success float-right">Create</button>
+                    <button type="submit" class="btn btn-primary float-right">Create</button>
                     <div class="clearfix"></div>
                 </form>
             

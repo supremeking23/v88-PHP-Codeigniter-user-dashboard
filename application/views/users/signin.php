@@ -18,10 +18,10 @@
 
 <?php $this->load->view("/users/includes/errors")?>
 
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
+        <div class="row ">
+            <div class="col-md-6 col-sm-12 content-background p-4 order-2 order-md-1">
                 <h2>Signin</h2>
-                <?= form_open("users/signin_process");?>
+                <?= form_open("users/signin_process",'class="mb-5"');?>
                 <!-- <form action="users/signin_process" method="POST"> -->
                     <div class="form-group">
                         <label for="email">Email address</label>
@@ -33,17 +33,17 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
 
-                    <button type="submit" class="btn btn-success float-right">Submit</button>
+                    <button type="submit" class="btn btn-primary float-right ">Submit</button>
                     <div class="clearfix"></div>
                 </form>
-            
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-6">
                 <a href="register">Don't have an account? Register</a>
             </div>
+
+            <div class="col-md-6 col-sm-12 order-1 order-md-2">
+                <img class="img-fluid" src="<?= base_url()?>assets/img/social-network.png" alt="social-network">
+            </div>
         </div>
+       
     </div>
     <?php $this->load->view("/users/includes/scripts")?>
   </body>

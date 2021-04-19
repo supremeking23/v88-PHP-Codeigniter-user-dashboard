@@ -27,9 +27,9 @@
 <?php endif; ?>
 
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 content-background p-4 order-2 order-md-1">
                 <h2>Registration</h2>
-                <?= form_open("users/register_process");?>
+                <?= form_open("users/register_process",'class="mb-5"');?>
                 <!-- <form action="users/register_process" method="POST"> -->
                     <div class="form-group">
                         <label for="email">Email address</label>
@@ -56,17 +56,16 @@
                     </div>
 
                     
-                    <button type="submit" class="btn btn-success float-right">Register</button>
+                    <button type="submit" class="btn btn-primary float-right">Register</button>
                     <div class="clearfix"></div>
                 </form>
-            
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-6">
                 <a href="signin">Already have an account ? Login</a>
             </div>
+            <div class="col-md-6 col-sm-12 order-1 order-md-2">
+                <img class="img-fluid" src="<?= base_url()?>assets/img/social-network.png" alt="social-network">
+            </div>
         </div>
+      
     </div>
 <?php $this->load->view("/users/includes/scripts")?>
 

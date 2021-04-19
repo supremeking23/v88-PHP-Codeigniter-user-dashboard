@@ -46,13 +46,13 @@ function dateDifference($date_1  , $differenceFormat = '%y %m %d %h %i %s')
         </div>
 <?php endif; ?>
 
-        <div class="row">
+        <div class="row content-background p-4">
             <div class="col-md-12">
                 <h1><?= $user['first_name']?> <?= $user['last_name']?></h1>
                 <!-- <a href="<?php echo base_url(); ?>admin">link</a> -->
             </div>
         </div>
-        <dl class="row mt-3">
+        <dl class="row mt-3 content-background p-4">
             <dt class="col-sm-3">Registered at : </dt>
             <dd class="col-sm-9"><?= date_format(date_create($user['created_at']), "F jS Y")?></dd>
             <dt class="col-sm-3">User ID at : </dt>
@@ -72,7 +72,7 @@ function dateDifference($date_1  , $differenceFormat = '%y %m %d %h %i %s')
                 <!-- Modal -->
                 <div class="modal fade post-message-reply" id="post-message" tabindex="-1" aria-labelledby="post-message" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+                        <div class="modal-content content-background">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Leave a message for <?= $user['first_name']?></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -125,7 +125,7 @@ if((int) $scatter_date_info[0] >= 1){
 
 $count = $this->reply->get_reply_count_by_message_id($message['message_id']);
 ?>
-            <div class="col-md-12 message mb-5" style="border:1px solid #000;padding:1rem">
+            <div class="col-md-12 message mb-5 content-background" style="">
                 <h2><?=$message["first_name"]?> <?=$message["last_name"]?></h2>
                 <span class="float-right"><?= $time?></span>
                 <p><?=$message["message"]?></p>

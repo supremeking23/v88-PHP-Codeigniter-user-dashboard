@@ -19,6 +19,7 @@ class Users extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index(){
+		$this->session->set_userdata("active_link","home");
 		$this->load->view('users/index');
 	}
 
@@ -80,6 +81,8 @@ class Users extends CI_Controller {
 					// 'student_fullname' => $student['first_name'].' '.$student['last_name'],
 					'is_logged_in' => true,
 					'user_level' => $user['user_level'],
+					'active_link' => "",
+					
 				 );
 				 $this->session->set_userdata($user);
 				 echo $this->session->userdata("user_level");
@@ -166,6 +169,7 @@ class Users extends CI_Controller {
 	}
 
     public function admin(){
+		$this->session->set_userdata("active_link","dashboard");
 		if($this->session->userdata('is_logged_in') === TRUE AND $this->session->userdata("user_level") == 9){
 			$data['users'] = $this->user->get_all_users();
 			$this->load->view('users/admin',$data);
@@ -365,16 +369,20 @@ class Users extends CI_Controller {
 
 
     public function dashboard(){
+		$this->session->set_userdata("active_link","dashboard");
 		if($this->session->userdata('is_logged_in') === TRUE AND $this->session->userdata("user_level") == 1){
 			$data['users'] = $this->user->get_all_users();
+			
 			$this->load->view('users/dashboard',$data);
 		}else{
+			
 			redirect(base_url()."signin");
 		}
 		
 	}
 
     public function show($id,$message_id = NULL){
+		$this->session->set_userdata("active_link","show");
 		$data['user'] = $this->user->get_user_by_id($id);
 		$data['messages'] = $this->message->get_all_messages_by_receipient_id($id);
 		// $data['reply_count'] = $this->reply->get_reply_count_by_message_id($message_id);
@@ -404,6 +412,7 @@ class Users extends CI_Controller {
 	}
 
     public function edit($id = NULL){
+		$this->session->set_userdata("active_link","profile");
 		if(!(is_null($id))){
 			$data['user_info'] = $this->user->get_user_by_id($id);
 		}else{
