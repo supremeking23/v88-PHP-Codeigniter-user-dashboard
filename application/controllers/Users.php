@@ -44,7 +44,7 @@ class Users extends CI_Controller {
 		$config = array(
 			array(
 				'field' => 'email',
-				'label' => 'email',
+				'label' => 'Email',
 				'rules' => 'trim|required|valid_email'
 			),
 			array(
@@ -374,9 +374,24 @@ class Users extends CI_Controller {
 		
 	}
 
-    public function show($id){
+    public function show($id,$message_id = NULL){
 		$data['user'] = $this->user->get_user_by_id($id);
-		$this->load->view('users/show',$data);
+		$data['messages'] = $this->message->get_all_messages_by_receipient_id($id);
+		// $data['reply_count'] = $this->reply->get_reply_count_by_message_id($message_id);
+		// 
+		if($message_id === NULL){
+			
+			$this->load->view('users/show',$data);
+		}else{
+			$message_details = array(
+				"message_id" => $message_id,
+				"to_user_id" => $id,
+			);
+			$data['message'] = $this->message->get_message_by_receipient_id_and_message_id($message_details);
+			$data['replies'] = $this->reply->get_all_replies_by_receipient_id_and_message_id($message_details);
+			$this->load->view('users/reply',$data);
+		}
+		
 	}
 
 	public function delete_user(){

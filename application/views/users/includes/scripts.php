@@ -3,5 +3,6 @@
 <script>
     $(document).ready(function(){
         $('.error-modal').modal({show:true,backdrop:"static"});
+        $('.post-message-reply').modal({show:false,backdrop:"static"});
     })
 </script>
