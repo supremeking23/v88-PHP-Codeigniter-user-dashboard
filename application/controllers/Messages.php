@@ -18,6 +18,15 @@ class Messages extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	/**
+	* TODO: Handles the creation of message 
+	* TODO: uses form validation library to validate form fields
+	* TODO: if the form field pass the validation process, all fields in the add post message form will be clean using XSS clean of codeigniter
+	* TODO: after the user information has been added to the database it will redirect back to the show method view with a success message
+	* @param: none
+	* * Author: Ivan Christian Jay Funcion
+	*/
 	public function post_message_process(){
 		// $this->load->view('users/index');
         $message_to = $this->input->post("message_to",TRUE);
