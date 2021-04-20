@@ -47,6 +47,7 @@ function dateDifference($date_1  , $differenceFormat = '%y %m %d %h %i %s')
             <div class="col-md-12">
                 <!-- <h1><?= $user['first_name']?> <?= $user['last_name']?></h1> -->
                 <!-- <a href="<?php echo base_url(); ?>admin">link</a> -->
+                <a href="<?= base_url();?>show/<?= $message["to_user_id"];?>" class="btn btn-primary"><i class="fas fa-arrow-circle-left"></i> Go back</a>
             </div>
         </div>
         <dl class="row mt-3  content-background p-4">

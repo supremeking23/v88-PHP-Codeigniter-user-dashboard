@@ -472,6 +472,7 @@ class Users extends CI_Controller {
 		$this->session->set_userdata("active_link","dashboard");
 		if($this->session->userdata('is_logged_in') === TRUE AND $this->session->userdata("user_level") == 1){
 			$data['users'] = $this->user->get_all_users();
+			$data['current_user'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
 			
 			$this->load->view('users/dashboard',$data);
 		}else{
