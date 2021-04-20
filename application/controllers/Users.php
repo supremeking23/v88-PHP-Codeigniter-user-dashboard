@@ -314,6 +314,16 @@ class Users extends CI_Controller {
 	* * Author: Ivan Christian Jay Funcion
 	*/
 
+	// public function edit_profile_process(){
+	// 	var_dump($this->input->post());
+
+	// 	if($this->input->post("user-level")){
+	// 		echo $this->input->post("user-level");
+	// 	}else{
+	// 		echo "walang user level";
+	// 	}
+	// }
+
 	public function edit_profile_process(){
 		if($this->input->post("process-type",TRUE) == "edit-info"){
 
@@ -346,12 +356,24 @@ class Users extends CI_Controller {
 				redirect(base_url()."edit");
 				die();
 			}else{
-				$user_details = array(
-					"email" => $this->input->post("email",TRUE),
-					"first_name" => $this->input->post("first_name",TRUE),
-					"last_name" => $this->input->post("last_name",TRUE),
-					"id" =>  $this->input->post("user-id",TRUE),
-				);
+
+				if($this->input->post("user-level")){
+					$user_details = array(
+						"email" => $this->input->post("email",TRUE),
+						"first_name" => $this->input->post("first_name",TRUE),
+						"last_name" => $this->input->post("last_name",TRUE),
+						"user_level" => $this->input->post("user-level",TRUE),
+						"id" =>  $this->input->post("user-id",TRUE),
+					);
+				}else{
+					$user_details = array(
+						"email" => $this->input->post("email",TRUE),
+						"first_name" => $this->input->post("first_name",TRUE),
+						"last_name" => $this->input->post("last_name",TRUE),
+						"id" =>  $this->input->post("user-id",TRUE),
+					);
+				}
+				
 				var_dump($user_details);
 				$edit_user = $this->user->edit_user_info($user_details);
 				if($edit_user === TRUE) {
@@ -364,7 +386,7 @@ class Users extends CI_Controller {
 					}
 					
 				}
-				// var_dump($this->input->post());
+				
 			}
 
 

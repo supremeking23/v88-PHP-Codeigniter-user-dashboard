@@ -27,8 +27,14 @@ class User extends CI_Model {
     }
 
     function edit_user_info($user){
-        $query = "UPDATE users SET email = ? , first_name = ? , last_name = ? , updated_at = ? WHERE id = ?";
-        $values = array($this->mysqli_real_escape_string($user['email']),$this->mysqli_real_escape_string($user['first_name']),$this->mysqli_real_escape_string($user['last_name']),date("Y-m-d, H:i:s"),$this->mysqli_real_escape_string($user['id']));
+        if(array_key_exists("user_level",$user)){
+            $query = "UPDATE users SET email = ? , first_name = ? , last_name = ?, user_level = ? , updated_at = ? WHERE id = ?";
+            $values = array($this->mysqli_real_escape_string($user['email']),$this->mysqli_real_escape_string($user['first_name']),$this->mysqli_real_escape_string($user['last_name']),$this->mysqli_real_escape_string($user['user_level']),date("Y-m-d, H:i:s"),$this->mysqli_real_escape_string($user['id']));
+        }else{
+            $query = "UPDATE users SET email = ? , first_name = ? , last_name = ? , updated_at = ? WHERE id = ?";
+            $values = array($this->mysqli_real_escape_string($user['email']),$this->mysqli_real_escape_string($user['first_name']),$this->mysqli_real_escape_string($user['last_name']),date("Y-m-d, H:i:s"),$this->mysqli_real_escape_string($user['id']));
+        }
+       
         return $this->db->query($query,$values);
     }
 

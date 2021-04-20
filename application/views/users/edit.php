@@ -76,6 +76,16 @@
                             <label for="last_name">Last Name</label>
                             <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name of the user" value="<?=$user_info["last_name"]?>">
                         </div>
+
+<?php if($this->session->userdata("user_level") == 9):?>
+                        <div class="form-group">
+                            <label for="user-level">User Level</label>
+                            <select class="form-control" name="user-level" id="user-level">
+                                <option value="1" <?= ($user_info["user_level"] == 1) ? "selected" :""?>>Normal</option>
+                                <option value="9" <?= ($user_info["user_level"] == 9) ? "selected" :""?>>Admin</option>
+                            </select>
+                        </div>
+<?php endif; ?>
                         <input type="hidden" name="process-type" value="edit-info">
                         <input type="hidden" name="user-id" value="<?=$user_info["id"];?>">
                         <button type="submit" class="btn btn-primary float-right">Save</button>
