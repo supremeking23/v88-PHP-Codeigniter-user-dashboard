@@ -7,16 +7,7 @@
 
 <?php $this->load->view("/users/includes/styles")?>
     <style>
-        fieldset {
-            background-color: #eeeeee;
-            padding:20px
-        }
-        legend {
-            background-color: gray;
-            color: white;
-            padding: 5px 10px;
-            width:50%
-        }
+
     </style>
     <title>Edit Profile</title>
 </head>

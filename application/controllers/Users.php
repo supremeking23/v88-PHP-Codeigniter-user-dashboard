@@ -218,6 +218,7 @@ class Users extends CI_Controller {
     public function admin(){
 		$this->session->set_userdata("active_link","dashboard");
 		if($this->session->userdata('is_logged_in') === TRUE AND $this->session->userdata("user_level") == 9){
+			$data['current_user'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
 			$data['users'] = $this->user->get_all_users();
 			$this->load->view('users/admin',$data);
 		}else{
@@ -491,6 +492,7 @@ class Users extends CI_Controller {
 	 */
     public function show($id,$message_id = NULL){
 		$this->session->set_userdata("active_link","show");
+		$data['current_user'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
 		$data['user'] = $this->user->get_user_by_id($id);
 		$data['messages'] = $this->message->get_all_messages_by_receipient_id($id);
 		// $data['reply_count'] = $this->reply->get_reply_count_by_message_id($message_id);
@@ -533,10 +535,12 @@ class Users extends CI_Controller {
 	* * Author: Ivan Christian Jay Funcion
 	*/
     public function edit($id = NULL){
-		$this->session->set_userdata("active_link","profile");
+		
+		$data['current_user'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
 		if(!(is_null($id))){
 			$data['user_info'] = $this->user->get_user_by_id($id);
 		}else{
+			$this->session->set_userdata("active_link","profile");
 			$data['user_info'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
 		}
 		

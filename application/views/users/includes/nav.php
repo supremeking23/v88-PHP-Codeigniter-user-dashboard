@@ -21,7 +21,7 @@
                     </li>
         <?php } ?>
                     <li class="nav-item <?=($this->session->userdata("active_link") == "profile") ? "active" :"" ?>">
-                        <a class="nav-link" href="<?php echo base_url(); ?>edit">Profile</a>
+                        <a class="nav-link" href="<?php echo base_url(); ?>edit"><?= $current_user["first_name"]?> <?= $current_user["last_name"]?></a>
                     </li>
     <?php }else{ ?>
                     <li class="nav-item <?=($this->session->userdata("active_link") == "home") ? "active" :"" ?>">
