@@ -58,14 +58,14 @@
                                 <!-- Modal -->
                                 <div class="modal fade" id="delete<?= $user['id'] ?>" tabindex="-1" role="dialog"  aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                        <div class="modal-content ">
-                                            <div class="modal-header text-white bg-danger">
+                                        <div class="modal-content content-background text-white">
+                                            <div class="modal-header text-white ">
                                                 <h5 class="modal-title" id="exampleModalLabel">Delete user: #<?= $user['id'] ?> </h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body text-danger">
+                                            <div class="modal-body">
                                                <p>Are you sure ?</p>
                                                <p>This action is irreversible, Are you sure you want to remove user:  <?= $user['email']?></p> 
 

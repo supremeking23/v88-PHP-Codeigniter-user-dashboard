@@ -27,7 +27,8 @@ class Users extends CI_Controller {
 	 */
 	public function index(){
 		$this->session->set_userdata("active_link","home");
-		$this->load->view('users/index');
+		$data['current_user'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
+		$this->load->view('users/index',$data);
 	}
 
 	/**
@@ -233,7 +234,8 @@ class Users extends CI_Controller {
 	 * * Author: Ivan Christian Jay Funcion
 	 */
     public function new(){
-		$this->load->view('users/new');
+		$data['current_user'] = $this->user->get_user_by_id($this->session->userdata("user_id"));
+		$this->load->view('users/new',$data);
 	}
 
 
